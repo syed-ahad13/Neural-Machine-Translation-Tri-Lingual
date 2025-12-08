@@ -1,0 +1,20 @@
+{
+    "nmt_train": {
+        "file_name": "train.jsonl",
+        "formatting": "alpaca",
+        "columns": {
+            "prompt": "instruction",
+            "query": "input",
+            "response": "output"
+        }
+    },
+    "nmt_test": {
+        "file_name": "test_set.jsonl",
+        "formatting": "alpaca",
+        "columns": {
+            "prompt": "instruction",
+            "query": "input",
+            "response": "output"
+        }
+    }
+}

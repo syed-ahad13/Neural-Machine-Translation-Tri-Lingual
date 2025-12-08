@@ -1,0 +1,52 @@
+### Model
+model_name_or_path: mistralai/Mistral-7B-Instruct-v0.3
+
+### Method (QLoRA)
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: all
+lora_rank: 64
+lora_alpha: 128
+lora_dropout: 0.05
+
+### Quantization (4-bit)
+quantization_bit: 4
+quantization_method: bitsandbytes
+
+### Dataset
+dataset: nmt_train
+dataset_dir: ./data
+template: mistral
+cutoff_len: 512
+max_samples: 100000
+overwrite_cache: true
+preprocessing_num_workers: 8
+
+### Output
+output_dir: ./outputs/mistral-nmt-qlora
+logging_steps: 50
+save_steps: 500
+save_total_limit: 3
+plot_loss: true
+overwrite_output_dir: true
+
+### Training hyperparameters
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 8
+learning_rate: 2.0e-4
+num_train_epochs: 3
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+
+### Optimization
+optim: paged_adamw_32bit
+max_grad_norm: 1.0
+
+### Evaluation
+val_size: 0.01
+per_device_eval_batch_size: 4
+eval_strategy: steps
+eval_steps: 500
